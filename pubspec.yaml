@@ -31,6 +31,8 @@ dependencies:
   intl: ^0.16.0
   #upload foto
   image_picker: ^0.6.1+11
+  shared_preferences: ^2.0.6
+  #login
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +56,7 @@ flutter:
     - assets/img/logo.png
     - assets/img/placeholder.png
     - assets/img/nikelogo.png
+    - assets/img/checklist.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

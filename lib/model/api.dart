@@ -1,6 +1,6 @@
 class BaseUrl {
-  static String url = "http://172.20.10.2/api_globalshop/";
-  static String paths = "http://172.20.10.2/api_globalshop/upload/";
+  static String url = "http://192.168.3.160/api_globalshop/";
+  static String paths = "http://192.168.3.160/api_globalshop/upload/";
 
   //VIEW DATA
   static String urlDataBarang = url + "api/data_barang.php";
@@ -21,4 +21,8 @@ class BaseUrl {
   //CART
   static String urlAddCart = url + "api/add_cart.php";
   static String urlCountCart = url + "api/count_cart.php?userid=";
+  static String urlMinusQty = url + "api/minus_qty_cart.php";
+  static String urlDetailCart = url + "api/detail_cart.php?userid=";
+  //CHECKOUT
+  static String urlCheckout = url + "api/proses_checkout.php";
 }
