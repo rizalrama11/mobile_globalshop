@@ -56,7 +56,7 @@ class AboutUs extends StatelessWidget {
               ),
             ),
             Card(
-              color: Colors.black,
+              color: Color(0xfffbc30b),
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(
@@ -74,7 +74,7 @@ class AboutUs extends StatelessWidget {
               ),
             ),
             Card(
-              color: Colors.black,
+              color: Color(0xfffbc30b),
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(
@@ -92,7 +92,7 @@ class AboutUs extends StatelessWidget {
               ),
             ),
             Card(
-              color: Colors.black,
+              color: Color(0xfffbc30b),
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(
@@ -110,7 +110,7 @@ class AboutUs extends StatelessWidget {
               ),
             ),
             Card(
-              color: Colors.black,
+              color: Color(0xfffbc30b),
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(

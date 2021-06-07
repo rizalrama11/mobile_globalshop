@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/mobile_globalshop/BuildConfig.java
+ com.example.mobile_globalshop.BuildConfig

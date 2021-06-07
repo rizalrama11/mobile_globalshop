@@ -107,7 +107,7 @@ class _DetailProdukState extends State<DetailProduk> {
         title: Image.asset(
           "assets/img/logo.png",
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffb4b4b4),
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
@@ -198,7 +198,7 @@ class _DetailProdukState extends State<DetailProduk> {
                   "assets/img/nikelogo.png",
                   width: 70,
                   fit: BoxFit.cover,
-                  color: Colors.black,
+                  color: Color(0xffb4b4b4),
                 ),
               ),
               Container(
@@ -296,7 +296,7 @@ class _DetailProdukState extends State<DetailProduk> {
                       child: Container(
                         width: size.width * 0.5,
                         decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Color(0xfffbc30b),
                             borderRadius: BorderRadius.circular(12)),
                         padding: EdgeInsets.all(16),
                         child: GestureDetector(
@@ -309,7 +309,7 @@ class _DetailProdukState extends State<DetailProduk> {
                             children: [
                               Icon(
                                 Icons.shopping_basket,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 25,
@@ -317,7 +317,7 @@ class _DetailProdukState extends State<DetailProduk> {
                               Text(
                                 "Add To Cart",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],

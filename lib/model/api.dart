@@ -25,4 +25,6 @@ class BaseUrl {
   static String urlDetailCart = url + "api/detail_cart.php?userid=";
   //CHECKOUT
   static String urlCheckout = url + "api/proses_checkout.php";
+  //LOGIN
+  static String urlLogin = url + "api/login.php";
 }

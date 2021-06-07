@@ -1,0 +1,4 @@
+#Thu Jun 03 19:59:36 WIB 2021
+base.0=/home/rizalrama11/Project/flutter/mobile_globalshop/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
