@@ -12,6 +12,7 @@ import 'package:mobile_globalshop/custom/constans.dart';
 import 'model/api.dart';
 import 'model/KeranjangModel.dart';
 import 'package:mobile_globalshop/views/Cart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuUser extends StatefulWidget {
   final VoidCallback signOut;
@@ -34,6 +35,16 @@ class _MenuUserState extends State<MenuUser> {
   final money = NumberFormat("#,##0", "en_US");
   var loading = false;
   final listProduk = new List<ProdukModel>();
+
+  String idUsers = "0";
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      idUsers = preferences.getString("userid");
+    });
+    _countCart();
+    _lihatData();
+  }
 
   Future<void> _lihatData() async {
     listProduk.clear();
@@ -88,7 +99,7 @@ class _MenuUserState extends State<MenuUser> {
       loading = true;
     });
     ex.clear();
-    final response = await http.get(BaseUrl.urlCountCart + "1");
+    final response = await http.get(BaseUrl.urlCountCart + idUsers);
     final data = jsonDecode(response.body);
     data.forEach((api) {
       final exp = new KeranjangModel(api['jumlah']);
@@ -110,8 +121,7 @@ class _MenuUserState extends State<MenuUser> {
   @override
   void initState() {
     super.initState();
-    _lihatData();
-    _countCart();
+    getPref();
   }
 
   @override

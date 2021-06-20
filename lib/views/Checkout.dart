@@ -68,7 +68,6 @@ class _CheckoutState extends State<Checkout> {
                   right: 30.0,
                 ),
                 onPressed: () {
-                  onPressed:
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 },

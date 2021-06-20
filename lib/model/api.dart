@@ -1,6 +1,6 @@
 class BaseUrl {
-  static String url = "http://192.168.3.160/api_globalshop/";
-  static String paths = "http://192.168.3.160/api_globalshop/upload/";
+  static String url = "http://192.168.1.114/api_globalshop/";
+  static String paths = "http://192.168.1.114/api_globalshop/upload/";
 
   //VIEW DATA
   static String urlDataBarang = url + "api/data_barang.php";

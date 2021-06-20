@@ -28,7 +28,7 @@ class _CartState extends State<Cart> {
     setState(() {
       idUsers = preferences.getString("userid");
     });
-    _countData();
+    _countData(idUsers);
     _lihatData();
   }
 
@@ -40,33 +40,34 @@ class _CartState extends State<Cart> {
     setState(() {
       loading = true;
     });
-    final response = await http.get(BaseUrl.urlDetailCart + idUsers);
+    final response = await http.get(Uri.parse(BaseUrl.urlDetailCart + idUsers));
+    print("hasil: " + BaseUrl.urlDetailCart + idUsers);
     if (response.contentLength == 2) {
     } else {
       final data = jsonDecode(response.body);
-      print("hasil api: " + data);
       data.forEach((api) {
-        final ab = new CartModel(api['id_barang'], idUsers, api['nama_barang'],
-            api['gambar'], api['harga'], api['qty']);
+        final ab = new CartModel(api['id_barang'], api['userid'],
+            api['nama_barang'], api['gambar'], api['harga'], api['qty']);
         list.add(ab);
       });
 
       setState(() {
-        _countData();
+        _countData(idUsers);
         loading = false;
       });
     }
   }
 
-  Future<void> _countData() async {
+  Future<void> _countData(String idUsers) async {
     setState(() {
       loading = true;
     });
     final responseCnt = await http.get(BaseUrl.urlCountCart + idUsers);
+    print("Hasil: " + BaseUrl.urlCountCart + idUsers);
     if (responseCnt.contentLength == 2) {
       final dataCnt = jsonDecode(responseCnt.body);
       dataCnt.forEach((api) {
-        totalBelanja = api['totalharga'];
+        totalBelanja = api(['totalharga']);
       });
 
       setState(() {
@@ -90,6 +91,7 @@ class _CartState extends State<Cart> {
                     TextFormField(
                       inputFormatters: [
                         WhitelistingTextInputFormatter.digitsOnly,
+                        CurrencyFormat()
                       ],
                       validator: (e) {
                         if (e.isEmpty) {
@@ -314,6 +316,7 @@ class _CartState extends State<Cart> {
   @override
   void initState() {
     super.initState();
+    getPref();
   }
 
   @override
@@ -367,7 +370,7 @@ class _CartState extends State<Cart> {
                             child: Image.network(
                               BaseUrl.paths + "" + x.gambar,
                               width: 100.0,
-                              height: 160.0,
+                              height: 100.0,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -402,6 +405,7 @@ class _CartState extends State<Cart> {
                                       ),
                                     ),
                                     onTap: () {
+                                      print("Hasil " + BaseUrl.urlMinusQty);
                                       if (_currentAmount > 0) {
                                         minusQtyinCart(
                                             x.id_barang, x.harga, x.idUsers);
