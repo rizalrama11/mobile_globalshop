@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 
 class DetailProduk extends StatefulWidget {
   final ProdukModel listProduk;
+  final listTerlaris = new List<ProdukTerlarisModel>();
+  final listTerbaru = new List<ProdukTerbaruModel>();
 
   DetailProduk({@required this.listProduk});
 

@@ -9,6 +9,8 @@ import 'package:mobile_globalshop/views/Checkout.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:mobile_globalshop/views/LoadingPageOne.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   final _key = new GlobalKey<FormState>();
+  final _keyAlert = new GlobalKey<FormState>();
   final money = NumberFormat("#,##0", "en_US");
   final list = new List<CartModel>();
   final GlobalKey<RefreshIndicatorState> _refresh =
@@ -28,7 +31,7 @@ class _CartState extends State<Cart> {
     setState(() {
       idUsers = preferences.getString("userid");
     });
-    _countData(idUsers);
+    _countData();
     _lihatData();
   }
 
@@ -52,27 +55,30 @@ class _CartState extends State<Cart> {
       });
 
       setState(() {
-        _countData(idUsers);
+        _countData();
         loading = false;
       });
     }
   }
 
-  Future<void> _countData(String idUsers) async {
+  Future<void> _countData() async{
     setState(() {
       loading = true;
     });
-    final responseCnt = await http.get(BaseUrl.urlCountCart + idUsers);
-    print("Hasil: " + BaseUrl.urlCountCart + idUsers);
-    if (responseCnt.contentLength == 2) {
+    final responseCnt = await http.get(Uri.parse(BaseUrl.urlCountCart + idUsers));
+    // print(BaseUrl.urlCountCart);
+    if(responseCnt.contentLength == 2) {
+
+    } else {
       final dataCnt = jsonDecode(responseCnt.body);
       dataCnt.forEach((api) {
-        totalBelanja = api(['totalharga']);
+        totalBelanja = api['totalharga'];
       });
-
+    if (this.mounted) {
       setState(() {
         loading = false;
       });
+      }
     }
   }
 
@@ -93,11 +99,11 @@ class _CartState extends State<Cart> {
                         WhitelistingTextInputFormatter.digitsOnly,
                         CurrencyFormat()
                       ],
-                      validator: (e) {
-                        if (e.isEmpty) {
-                          return "Silahkan isi nilai bayar";
-                        }
-                      },
+                  validator: (e) {
+                    if(e.isEmpty) {
+                      return "Silahkan isi Nilai bayar";
+                    }
+                  },
                       onSaved: (e) => nilaiBayar = e,
                       decoration: InputDecoration(labelText: "Nilai Bayar"),
                     ),
@@ -146,7 +152,7 @@ class _CartState extends State<Cart> {
         builder: (context) {
           return Dialog(
             child: Form(
-              key: _key,
+              key: _keyAlert,
               child: ListView(
                 padding: EdgeInsets.all(16.0),
                 shrinkWrap: true,
@@ -252,7 +258,7 @@ class _CartState extends State<Cart> {
     if (dNilaiBayar >= dTotal) {
       final response = await http.post(BaseUrl.urlCheckout, body: {
         "userid": iduser,
-        "grandTotal": total.replaceAll(",", ""),
+        "grandtotal": total.replaceAll(",", ""),
         "nilaibayar": nilaiBayar.replaceAll(",", ""),
         "nilaikembali": dNilaiKembali.toString()
       });
@@ -350,7 +356,7 @@ class _CartState extends State<Cart> {
         onRefresh: _lihatData,
         key: _refresh,
         child: loading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(child: LoadingPageOne())
             : ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (context, i) {
@@ -361,20 +367,26 @@ class _CartState extends State<Cart> {
                     margin: const EdgeInsets.only(bottom: 5),
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
+                        Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
-                            child: Image.network(
-                              BaseUrl.paths + "" + x.gambar,
-                              width: 100.0,
-                              height: 100.0,
-                              fit: BoxFit.fill,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 0,
+                                horizontal: 0,
+                              ),
+                              child: Center(
+                                child: Image.network(
+                                  BaseUrl.paths + "" + x.gambar,
+                                  width: 190,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
                         SizedBox(
                           width: 10,
                         ),
@@ -397,7 +409,7 @@ class _CartState extends State<Cart> {
                                       padding: const EdgeInsets.all(5.0),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Colors.orange,
+                                        color: Color(0xfffbc30b),
                                       ),
                                       child: Icon(
                                         Icons.remove,
@@ -475,10 +487,10 @@ class _CartState extends State<Cart> {
                   child: new Text(
                     "Check Out",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
-                  color: Colors.orange,
+                  color: Color(0xfffbc30b),
                 ),
               ),
             ),

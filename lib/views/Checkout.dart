@@ -44,15 +44,15 @@ class _CheckoutState extends State<Checkout> {
             Center(
               child: Image.asset(
                 'assets/img/checklist.png',
-                width: 80.0,
-                height: 80.0,
+                width: 350.0,
+                height: 350.0,
               ),
             ),
             Center(
               child: Text(
                 "\nBerhasil Checkout!",
                 style: TextStyle(
-                  color: Colors.green,
+                  color: Colors.black,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -71,11 +71,11 @@ class _CheckoutState extends State<Checkout> {
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 },
-                color: Colors.green,
+                color: Color(0xfffbc30b),
                 child: Text(
                   "Transaksi Baru",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),

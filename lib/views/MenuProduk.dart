@@ -5,7 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:mobile_globalshop/model/ProdukModel.dart';
 import 'package:mobile_globalshop/model/api.dart';
 import 'package:mobile_globalshop/views/EditProduk.dart';
+import 'package:mobile_globalshop/views/LoadingPageOne.dart';
 import 'package:mobile_globalshop/views/TambahProduk.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MenuProduk extends StatefulWidget {
   @override
@@ -156,7 +158,7 @@ class _MenuProdukState extends State<MenuProduk> {
         onRefresh: _lihatData,
         key: _refresh,
         child: loading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(child: LoadingPageOne())
             : ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (context, i) {

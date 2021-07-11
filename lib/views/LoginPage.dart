@@ -227,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                                   fillColor: Color(0xffe7edeb),
                                   hintText: "Password",
                                   prefixIcon: Icon(
-                                    Icons.password,
+                                    Icons.vpn_key,
                                     color: Colors.grey[600],
                                   ),
                                   suffixIcon: IconButton(
